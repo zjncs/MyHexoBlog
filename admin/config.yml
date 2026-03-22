@@ -1,0 +1,31 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+site_url: https://zjncs.github.io
+display_url: https://zjncs.github.io
+publish_mode: simple
+
+media_folder: "source/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "posts"
+    label: "Posts"
+    label_singular: "Post"
+    folder: "source/_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm:ss" }
+      - { label: "Updated", name: "updated", widget: "datetime", required: false, format: "YYYY-MM-DD HH:mm:ss" }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Categories", name: "categories", widget: "list", required: false }
+      - { label: "Cover", name: "cover", widget: "image", required: false }
+      - { label: "Draft", name: "draft", widget: "boolean", required: false, default: false }
+      - { label: "Body", name: "body", widget: "markdown" }

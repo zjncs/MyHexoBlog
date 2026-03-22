@@ -1,0 +1,20 @@
+intro:
+  quote: 建立连接，发现知识的脉络。
+
+showcase:
+  - title: 算法 / LeetCode
+    desc: 刷题笔记与题单，配合可复用的代码模板。
+  - title: LLM / 论文研读
+    desc: 前沿 paper 摘要、实验复现踩坑、Prompt 设计备忘。
+  - title: 开源 / 工程化
+    desc: 项目脚手架、CI/CD 流水线、性能调优手册。
+
+quickgrid:
+  - icon: fas fa-network-wired
+    text: 知识节点索引
+  - icon: fas fa-layer-group
+    text: 思维导图 / 结构化纲要
+  - icon: fas fa-bolt
+    text: 快速复习卡片 & 代码片段
+  - icon: fas fa-route
+    text: 学习路线：入门 → 进阶 → 应用

@@ -1,8 +1,15 @@
 .DS_Store
 Thumbs.db
+._*
+**/._*
 db.json
 *.log
 node_modules/
 public/
 .deploy*/
 _multiconfig.yml
+data/
+blogInfoList.json
+deploy_config.json
+MyHexoBlog.zip
+source/_discarded/

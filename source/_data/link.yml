@@ -1,0 +1,29 @@
+intro: 收藏一些常用的学习与灵感来源，持续补充。
+
+sections:
+  - title: 朋友 / 博客
+    items:
+      - name: 阮一峰的网络日志
+        url: https://www.ruanyifeng.com/blog/
+        desc: 体系化前端与技术杂谈。
+      - name: Overreacted
+        url: https://overreacted.io/
+        desc: Dan Abramov 的思考与前端设计实践。
+  - title: 工具站
+    items:
+      - name: Excalidraw
+        url: https://excalidraw.com/
+        desc: 轻量在线白板，画路线图和架构草图。
+      - name: Raycast Store
+        url: https://www.raycast.com/store
+        desc: 效率工具与工作流集合。
+  - title: 模板 & 资源
+    items:
+      - name: Awesome LLM Apps
+        url: https://github.com/semiosis/awesome-llm-apps
+        desc: LLM 应用参考合集。
+      - name: Roadmap.sh
+        url: https://roadmap.sh/
+        desc: 各类技术路线图。
+
+closing: 如果你也想互换友链，直接提 issue 或邮件联系。

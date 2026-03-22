@@ -1,43 +1,34 @@
-# Hexo Configuration
-## Docs: https://hexo.io/docs/configuration.html
-## Source: https://github.com/hexojs/hexo/
-
-# Site
 title: Johnny-Zhao's TechBlog
-subtitle: 'KEEP FIGHTING'
-description: '技术博客，记录学习与生活点滴'
-keywords: 'Hexo, Blog, Johnny-Zhao'
+subtitle: KEEP FIGHTING
+description: 技术博客，记录学习与生活点滴
+keywords: Hexo, Blog, Johnny-Zhao
 author: Johnny-Zhao
 language: zh-CN
 timezone: ''
-
-# URL
-## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://zjncs.github.io
-permalink: :year/:month/:day/:title/
-permalink_defaults:
+permalink: ':year/:month/:day/:title/'
+permalink_defaults: null
 pretty_urls:
-  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
-  trailing_html: true # Set to false to remove trailing '.html' from permalinks
-
-# Directory
+  trailing_index: true
+  trailing_html: true
 source_dir: source
 public_dir: public
 tag_dir: tags
 archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
-i18n_dir: :lang
-skip_render: admin/**
-
-
-# Writing
-new_post_name: :title.md # File name of new posts
+i18n_dir: ':lang'
+skip_render:
+  - admin/**
+  - '**/._*'
+  - '**/.DS_Store'
+  - '**/Thumbs.db'
+new_post_name: ':title.md'
 default_layout: post
-titlecase: false # Transform title into titlecase
+titlecase: false
 external_link:
-  enable: true # Open external links in new tab
-  field: site # Apply to the whole site
+  enable: true
+  field: site
   exclude: ''
 filename_case: 0
 render_drafts: false
@@ -55,69 +46,59 @@ prismjs:
   preprocess: true
   line_number: true
   tab_replace: ''
-
-# Home page setting
-# path: Root path for your blogs index page. (default = '')
-# per_page: Posts displayed per page. (0 = disable pagination)
-# order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ''
   per_page: 10
-  order_by: -date
-
-# Category & Tag
+  order_by: '-date'
 default_category: uncategorized
-category_map:
-tag_map:
-
-# Metadata elements
-## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
+category_map: null
+tag_map: null
 meta_generator: true
-
-# Date / Time format
-## Hexo uses Moment.js to parse and display date
-## You can customize the date format as defined in
-## http://momentjs.com/docs/#/displaying/format/
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
-## updated_option supports 'mtime', 'date', 'empty'
-updated_option: 'mtime'
-
-# Pagination
-## Set per_page to 0 to disable pagination
+updated_option: mtime
 per_page: 10
 pagination_dir: page
-
-# Include / Exclude file(s)
-## include:/exclude: options only apply to the 'source/' folder
-include:
-exclude:
+include: null
+exclude: null
 ignore:
-
-# Extensions
-## Plugins: https://hexo.io/plugins/
-## Themes: https://hexo.io/themes/
+  - '**/._*'
+  - '**/.DS_Store'
+  - '**/Thumbs.db'
 theme: butterfly
-
 comment:
   enable: true
   type: giscus
   giscus:
-    repo: "zjncs/zjn-blog-comments"
-    repoId: "R_kgDOPVdIdg"
-    category: "Announcements"
-    categoryId: "DIC_kwDOPVdIds4CtlzW"
-    mapping: "pathname"
+    repo: zjncs/zjn-blog-comments
+    repoId: R_kgDOPVdIdg
+    category: Announcements
+    categoryId: DIC_kwDOPVdIds4CtlzW
+    mapping: pathname
     strict: false
     reactionsEnabled: true
     emitMetadata: false
-    inputPosition: "bottom"
-    theme: "noborder_light"
-    lang: "zh-CN"
-
-# Deployment
-## Docs: https://hexo.io/docs/one-command-deployment
+    inputPosition: bottom
+    theme: purple_dark
+    lang: zh-CN
 deploy:
   type: git
-  repo: https://github.com/zjncs/zjncs.github.io.git
+  repo: >-
+    https://github.com/zjncs/zjncs.github.io.git
   branch: main
+  message: 'Site updated: {{ now("YYYY-MM-DD HH:mm:ss") }}'
+markdown:
+  render:
+    html: true
+    xhtmlOut: false
+    breaks: true
+    linkify: true
+    typographer: true
+    quotes: “”‘’
+  plugins:
+    - plugin:
+        name: markdown-it-katex
+        enable: true
+    - plugin:
+        name: markdown-it-mark
+        enable: true

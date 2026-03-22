@@ -2,10 +2,135 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Decap CMS</title>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+
+      @media (max-width: 820px) {
+        html {
+          font-size: 15px;
+        }
+
+        body {
+          min-width: 0;
+          overflow-x: hidden;
+          background: #f4f7fb;
+          touch-action: manipulation;
+        }
+
+        body :is(main, section, article, aside, nav, form, div) {
+          min-width: 0;
+          box-sizing: border-box;
+        }
+
+        body :is(input, textarea, select, button) {
+          font-size: 16px !important;
+        }
+
+        body button {
+          min-height: 44px;
+          border-radius: 14px;
+        }
+
+        body input,
+        body textarea,
+        body select {
+          min-height: 44px;
+          border-radius: 12px;
+        }
+
+        body textarea {
+          min-height: 12rem;
+        }
+
+        body aside {
+          width: min(19rem, 82vw) !important;
+          max-width: 82vw !important;
+        }
+
+        body main {
+          width: 100% !important;
+          min-width: 0 !important;
+        }
+
+        body main > div,
+        body section > div,
+        body article > div {
+          min-width: 0 !important;
+        }
+
+        body [role="dialog"] {
+          inset: 8px !important;
+          width: auto !important;
+          max-width: none !important;
+          max-height: calc(100dvh - 16px) !important;
+          border-radius: 18px !important;
+        }
+
+        body [data-slate-editor="true"] {
+          min-height: 52dvh !important;
+          padding-bottom: 20vh !important;
+        }
+
+        body table {
+          display: block;
+          width: 100% !important;
+          overflow-x: auto;
+          white-space: nowrap;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        body img {
+          max-width: 100%;
+          height: auto;
+        }
+      }
+
+      @media (max-width: 640px) {
+        body aside {
+          width: min(17rem, 86vw) !important;
+          max-width: 86vw !important;
+        }
+
+        body main,
+        body section,
+        body article {
+          padding-left: 12px !important;
+          padding-right: 12px !important;
+        }
+
+        body [role="dialog"] {
+          inset: 6px !important;
+          max-height: calc(100dvh - 12px) !important;
+        }
+
+        body [data-slate-editor="true"] {
+          min-height: 58dvh !important;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="nc-root"></div> <!-- 这里必须有这个 div -->
-    <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
+    <script>
+      if (window.location.hostname === "zjncs.github.io") {
+        window.location.replace("https://dapper-quokka-35d133.netlify.app/admin/");
+      }
+    </script>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", function (user) {
+          if (!user) {
+            window.netlifyIdentity.on("login", function () {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
   </body>
 </html>

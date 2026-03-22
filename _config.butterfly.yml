@@ -1,275 +1,158 @@
 # ==========================================================
-# 您的Butterfly主题最终配置文件
+# Butterfly 配置文件 — Academic OS Ultimate (Fixed)
+# 架构师：Johnny-Zhao | 风格：深度学术毛玻璃
 # ==========================================================
 
-# --- 首页配置 ---
-
-# 网站图标
+# ----------------------------------------------------------
+# 1. 站点核心 (Core)
+# ----------------------------------------------------------
 favicon: /img/favicon.png
 
-# 头像设置
 avatar:
   img: /img/avatar.png
-  effect: false # 头像会一直转圈
+  effect: true
 
-# 夜间模式
+error_404:
+  img: /img/404.jpg
+
+# ----------------------------------------------------------
+# 2. 导航交互 (Navigation UX)
+# ----------------------------------------------------------
+nav:
+  logo:
+  display_title: true
+  fixed: true
+
+menu:
+  Home: / || fas fa-home
+  Wiki: /wiki/ || fas fa-compass
+  Life: /life/ || fas fa-coffee
+  Link: /link/ || fas fa-link
+  About: /about/ || fas fa-user-astronaut
+
+# ----------------------------------------------------------
+# 3. 视觉表现 (Visual Presentation)
+# ----------------------------------------------------------
 darkmode:
   enable: true
-  button: true    # 显示切换按钮
-  autoChangeMode: 1  # 1 跟随系统，2 自动切换，false 关闭
- 
-# 字体设置
-font:
-  global-font-size: PingFang SC
-  code-font-size: JetBrains Mono
-  font-family: '"Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif'
-  code-font-family: '"JetBrains Mono", "Fira Code", "Cascadia Code", Consolas, monospace'
-# 网站背景
-background: /img/bg.jpg
+  button: true
+  autoChangeMode: false
 
-# 页面加载动画
-preloader:
+readmode:
   enable: true
-  source: 1  
 
-# 首页顶部图
-index_img: /img/carousel.jpg
+index_img: /img/archive-bg.png
 
-# 主页副标题打字机效果
 subtitle:
   enable: true
-  effect: true  # 打字机效果
-  startDelay: 300
-  typeSpeed: 150
-  backSpeed: 50
+  effect: true
   loop: true
-  source: false
   sub:
-    - '愿你历尽千帆，归来仍是少年'
-    - '代码改变世界，技术成就梦想'
-    - '不积跬步，无以至千里'
-    - '山高路远，但见风光无限'
-    
-# 主页文章列表显示
-index_post_content:
-  method: 3   # 1 description 2 both 3 auto_excerpt
-  length: 500
-
-# 文章列表的样式 (card/masonry)
-# 文章页顶部图
+    - "Design is not just what it looks like and feels like."
+    - "Design is how it works."
+    - "Thinking in Systems & Algorithms."
+# ----------------------------------------------------------
 post:
   default_top_img: /img/index.jpg
-  meta:
-    author: true
-    date:
-      created: true
-      updated: true
-    categories: true
-    tags: true
-  
-# 代码块设置
-highlight_theme: mac  # darker / pale night / light / ocean / mac / mac light
+  archive_top_img: /img/archive-bg.png
+  tag_top_img: /img/tag-bg.png
+  category_top_img: /img/index.jpg
+font:
+  global-font-size: 16px
+  code-font-size: 14px
+  # 使用双引号包裹整个字符串，避免特殊字符引起解析错误
+  font-family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Lato, Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif"
+  code-font-family: "'JetBrains Mono', 'Fira Code', 'Consolas', monospace"
+
+highlight_theme: mac
 highlight_copy: true
 highlight_lang: true
 highlight_shrink: false
-highlight_height_limit: 300
-
-# 代码框展开/收缩
 code_word_wrap: true
 
-# 本地搜索
-local_search:
+# ----------------------------------------------------------
+# 5. 侧边栏布局 (Aside Layout)
+# ----------------------------------------------------------
+aside:
   enable: true
-  preload: false
-  CDN:
+  hide: false
+  button: true
+  position: right
+  mobile: false
+  card_author:
+    enable: true
+    description: 'Full Stack Developer <br> Architecture Enthusiast'
+    button:
+      enable: true
+      icon: fab fa-github
+      text: Github
+      link: https://github.com/zjncs
+  card_announcement:
+    enable: true
+    content: '<span class="badge-glitch" data-text="LAB">LAB</span><br>这里记录 Agent、系统设计和一些有意思的折腾。<br>最近在做 GUI 自动化、RAG 和记忆系统。'
 
-# Algolia 搜索（可选）
-algolia_search:
-  enable: false
-  hits:
-    per_page: 6
-
-# 文章目录
+# ----------------------------------------------------------
+# 6. 组件功能 (Components)
+# ----------------------------------------------------------
 toc:
   post: true
-  page: false
   number: true
-  expand: false
-  style_simple: false
-  scroll_percent: true
+  expand: true
+  style_simple: true
 
-# 版权信息
 post_copyright:
   enable: true
   decode: false
-  author_href:
-  license: CC BY-NC-SA 4.0
-  license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
+  author_href: https://github.com/zjncs
+  license: 'CC BY-NC-SA 4.0'
 
-# --- 社交链接 ---
-# 用于侧边栏和页脚
-social:
-  fab fa-github: https://github.com/zjncs || Github
-  fas fa-envelope: mailto:zhaojianing@tju.edu.cn || Email
+math:
+  use: katex
+  per_page: false
+  hide_scrollbar: true
+  katex:
+    copy_tex: true
 
-# --- 侧边栏配置 (问题的核心) ---
-aside:
-  # 总开关，必须为 true
+# ----------------------------------------------------------
+# 7. 性能与加载 (Performance)
+# ----------------------------------------------------------
+preloader:
+  enable: false
+
+local_search:
   enable: true
-  # 侧边栏在右侧
-  button: true
-  position: right
-  # 移动端显示侧边栏按钮
-  mobile: true
-  # 显示所有侧边栏内容（文章归档、标签、分类）
-  display:
-    archive: true
-    tag: true
-    category: true
-  # 作者信息卡片
-  card_author:
-    enable: true
-    avatar: /img/avatar.png
-    author: Johnny-Zhao
-    description: Attention is all you need.
-  card_announcement:
-    enable: true
-    content: '欢迎来到我的技术博客！这里记录着我在编程路上的思考与实践。'
-  card_recent_post:
-    enable: true
-    limit: 5
-    sort: date
-  card_categories:
-    enable: true
-    limit: 8
-    expand: none
-  card_tags:
-    enable: true
-    limit: 40
-    color: false
-    orderby: random
-    order: 1
-    sort_order:
-  card_archives:
-    enable: true
-    type: monthly
-    format: MMMM YYYY
-    order: -1
-    limit: 8
-footer:
-  owner:
-    enable: true
-    since: 2023
-  custom_text: '愿你的代码永远没有 Bug ❤️'
-  copyright: true
+  preload: false
 
-# 跳动的心
-footer_beautify:
+lazyload:
   enable: true
-  field: site # site/post
-  title-prefix-icon: '\f0c1'
-  title-prefix-icon-color: '#F47466'
+  placeholder: /img/loading.gif
 
-# 站点地图
-sitemap:
-  path: sitemap.xml
-
-# RSS 订阅
-feed:
-  enable: true
-  type: atom
-  path: atom.xml
-  limit: 20
-  hub:
-  content:
-  content_limit: 140
-  content_limit_delim: ' '
-  order_by: -date
-
-# SEO 优化
-seo:
-  baidu_site_verification:
-  google_site_verification:
-  bing_site_verification:
-
-# 结构化数据
-structured_data:
-  enable: true
-  logo: /img/logo.png
-
-# 压缩设置
 minify:
   html:
     enable: true
-    exclude:
   css:
     enable: true
-    exclude: ['*.min.css']
   js:
     enable: true
-    exclude: ['*.min.js']
 
-# CDN 配置
-CDN:
-  option: jsdelivr
-  
-# Pjax 无刷新加载
-pjax:
-  enable: true
-  exclude:
-    - /music/
-    - /no-pjax/
-
-# Service Worker
-sw:
-  enable: true
-  sw_name: sw.js
-
-# KaTeX 数学公式
-katex:
-  enable: true
-  per_page: false
-  hide_scrollbar: true
-
-# MathJax 数学公式（二选一）
-mathjax:
-  enable: false
-  per_page: false
-
-# 移动端菜单
-mobile:
-  aside: true
-  
-# PWA 支持
-pwa:
-  enable: true
-  manifest: /manifest.json
-  theme_color: "#6366f1"
-  mask_icon: /img/pwa/safari-pinned-tab.svg
-  apple_touch_icon: /img/pwa/apple-touch-icon.png
-  bookmark_icon: /img/pwa/safari-pinned-tab.svg
-  favicon_32_32: /img/pwa/32.png
-  favicon_16_16: /img/pwa/16.png
-
-# 移动端广告配置
-ad:
-  mobile_sidebar: false
-  mobile_index: false
-
-
-
-# --- 自定义文件注入 ---
-# 用于加载您自己的 CSS 或 JS
-# _config.butterfly.yml
+# ----------------------------------------------------------
+# 8. 资源注入 (Injection)
+# ----------------------------------------------------------
 inject:
   head:
-    - <link rel="stylesheet" href="/css/custom.css">
     - <link rel="preconnect" href="https://fonts.googleapis.com">
     - <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    - <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    - <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    - <link rel="stylesheet" href="/css/geek-theme.css">
+
   bottom:
     - <script src="/js/custom.js"></script>
 
-# --- 图片放大预览功能 ---
-# 开启后，点击文章中的图片可以放大
-lightbox: fancybox
+# ----------------------------------------------------------
+# 9. 页脚 (Footer)
+# ----------------------------------------------------------
+footer:
+  owner:
+    enable: true
+    since: 2025
+  copyright: true
