@@ -12,6 +12,23 @@
     'image/svg+xml': 'svg'
   };
 
+  const normalizeErrorMessage = message => {
+    const text = String(message || '').trim();
+
+    if (!text) return '图片上传失败';
+    if (/TYPORAPIC_TOKEN/i.test(text)) {
+      return '图床还没有完成密钥配置，请先在 Netlify 环境变量里添加 TYPORAPIC_TOKEN。';
+    }
+    if (/Unauthorized/i.test(text)) {
+      return '登录状态已失效，请刷新后台后重新登录。';
+    }
+    if (/GitHub upload failed/i.test(text)) {
+      return '图床上传失败，请检查 TyporaPic 仓库权限和 Token 配置。';
+    }
+
+    return text;
+  };
+
   const showToast = (message, type = 'info', sticky = false) => {
     let toast = document.getElementById(TOAST_ID);
 
@@ -148,7 +165,7 @@
     const result = await response.json().catch(() => ({}));
 
     if (!response.ok) {
-      throw new Error(result.error || '图片上传失败');
+      throw new Error(normalizeErrorMessage(result.error || '图片上传失败'));
     }
 
     return result;
@@ -171,7 +188,7 @@
 
       showToast('图片已上传并插入正文', 'success');
     } catch (error) {
-      showToast(error.message || '图片上传失败', 'error', true);
+      showToast(normalizeErrorMessage(error.message), 'error', true);
     }
   };
 

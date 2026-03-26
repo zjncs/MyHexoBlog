@@ -71,12 +71,12 @@ exports.handler = async event => {
   }
 
   if (!(await verifyIdentity(event))) {
-    return json(401, { error: 'Unauthorized' })
+    return json(401, { error: '登录状态已失效，请刷新后台后重新登录。' })
   }
 
   const token = process.env.TYPORAPIC_TOKEN || process.env.GITHUB_TOKEN
   if (!token) {
-    return json(500, { error: 'Missing TYPORAPIC_TOKEN environment variable' })
+    return json(500, { error: '图床还没有完成密钥配置，请在 Netlify 环境变量中添加 TYPORAPIC_TOKEN。' })
   }
 
   let payload
@@ -136,8 +136,16 @@ exports.handler = async event => {
 
   const result = await response.json().catch(() => ({}))
   if (!response.ok) {
+    let message = result.message || 'GitHub upload failed'
+
+    if (response.status === 401 || response.status === 403) {
+      message = '图床授权失败，请检查 TYPORAPIC_TOKEN 是否具备 TyporaPic 仓库的 Contents 读写权限。'
+    } else if (response.status === 404) {
+      message = '找不到 TyporaPic 仓库或目标路径，请检查仓库名和分支配置。'
+    }
+
     return json(response.status, {
-      error: result.message || 'GitHub upload failed'
+      error: message
     })
   }
 
