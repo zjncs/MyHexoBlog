@@ -42,6 +42,10 @@ readmode:
   enable: true
 
 index_img: /img/archive-bg.png
+default_top_img: /img/index.jpg
+archive_img: /img/archive-bg.png
+tag_img: /img/tag-bg.png
+category_img: /img/index.jpg
 
 subtitle:
   enable: true
@@ -51,12 +55,6 @@ subtitle:
     - "Design is not just what it looks like and feels like."
     - "Design is how it works."
     - "Thinking in Systems & Algorithms."
-# ----------------------------------------------------------
-post:
-  default_top_img: /img/index.jpg
-  archive_top_img: /img/archive-bg.png
-  tag_top_img: /img/tag-bg.png
-  category_top_img: /img/index.jpg
 font:
   global-font-size: 16px
   code-font-size: 14px
@@ -108,8 +106,8 @@ post_copyright:
 
 math:
   use: katex
-  per_page: false
-  hide_scrollbar: true
+  per_page: true
+  hide_scrollbar: false
   katex:
     copy_tex: true
 
