@@ -28,4 +28,8 @@ collections:
       - { label: "Categories", name: "categories", widget: "list", required: false }
       - { label: "Cover", name: "cover", widget: "image", required: false }
       - { label: "Draft", name: "draft", widget: "boolean", required: false, default: false }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        editor_components: ["image", "code-block", "quote"]
+        hint: "支持直接粘贴截图上传到 TyporaPic；如果失败，可用 + -> image 手动插入。"
