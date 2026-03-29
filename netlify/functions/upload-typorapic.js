@@ -88,6 +88,13 @@ const verifyIdentity = async event => {
   return response.ok
 }
 
+const hasBlobsContext = event =>
+  Boolean(
+    event?.blobs ||
+    process.env.NETLIFY_BLOBS_CONTEXT ||
+    globalThis.netlifyBlobsContext
+  )
+
 const getBlobsStore = async event => {
   try {
     connectLambda(event)
@@ -141,11 +148,14 @@ exports.handler = async event => {
   const month = String(now.getUTCMonth() + 1).padStart(2, '0')
   const day = String(now.getUTCDate()).padStart(2, '0')
   const filePath = `${year}/${month}/${day}/${stamp}-${originalName}`
+  const buffer = Buffer.from(source, 'base64')
 
   try {
-    const store = await getBlobsStore(event)
-    const buffer = Buffer.from(source, 'base64')
+    if (!hasBlobsContext(event)) {
+      return json(200, await uploadViaCatbox({ buffer, originalName }))
+    }
 
+    const store = await getBlobsStore(event)
     await store.set(filePath, buffer, {
       metadata: {
         contentType,
@@ -168,8 +178,6 @@ exports.handler = async event => {
     })
   } catch (error) {
     try {
-      const originalName = sanitizeFileName(payload.originalName, ext)
-      const buffer = Buffer.from(source, 'base64')
       const fallback = await uploadViaCatbox({ buffer, originalName })
       return json(200, fallback)
     } catch (fallbackError) {

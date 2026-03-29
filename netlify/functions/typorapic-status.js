@@ -9,8 +9,29 @@ const headers = {
 }
 
 const STORE_NAME = 'cms-images'
+const hasBlobsContext = event =>
+  Boolean(
+    event?.blobs ||
+    process.env.NETLIFY_BLOBS_CONTEXT ||
+    globalThis.netlifyBlobsContext
+  )
 
 exports.handler = async event => {
+  if (!hasBlobsContext(event)) {
+    return {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify({
+        ok: true,
+        storage: 'catbox-fallback',
+        store: STORE_NAME,
+        write: null,
+        read: null,
+        note: '当前运行环境没有注入 Netlify Blobs 上下文，图片上传会自动回退到 Catbox。'
+      })
+    }
+  }
+
   const status = {
     ok: true,
     storage: 'netlify-blobs',
