@@ -1,23 +1,50 @@
 'use strict'
 
+const crypto = require('node:crypto')
+const { connectLambda, getStore } = require('@netlify/blobs')
+
 const headers = {
   'Access-Control-Allow-Origin': '*',
   'Content-Type': 'application/json; charset=utf-8'
 }
 
-exports.handler = async () => {
-  const token = process.env.TYPORAPIC_TOKEN || process.env.GITHUB_TOKEN
+const STORE_NAME = 'cms-images'
+
+exports.handler = async event => {
+  const status = {
+    ok: true,
+    storage: 'netlify-blobs',
+    store: STORE_NAME
+  }
+
+  try {
+    connectLambda(event)
+    const store = getStore(STORE_NAME)
+    const key = `_health/${Date.now()}-${crypto.randomBytes(4).toString('hex')}.txt`
+    const value = `ok:${new Date().toISOString()}`
+
+    await store.set(key, value, {
+      metadata: {
+        contentType: 'text/plain; charset=utf-8'
+      }
+    })
+
+    const blob = await store.getWithMetadata(key, { type: 'text' })
+    await store.delete(key)
+
+    status.write = true
+    status.read = blob?.data === value
+    status.metadata = blob?.metadata || null
+  } catch (error) {
+    status.ok = false
+    status.write = false
+    status.read = false
+    status.error = String(error?.message || error)
+  }
 
   return {
     statusCode: 200,
     headers,
-    body: JSON.stringify({
-      ok: true,
-      tokenConfigured: Boolean(token),
-      tokenSource: process.env.TYPORAPIC_TOKEN ? 'TYPORAPIC_TOKEN' : (process.env.GITHUB_TOKEN ? 'GITHUB_TOKEN' : null),
-      owner: process.env.TYPORAPIC_OWNER || 'zjncs',
-      repo: process.env.TYPORAPIC_REPO || 'TyporaPic',
-      branch: process.env.TYPORAPIC_BRANCH || 'main'
-    })
+    body: JSON.stringify(status)
   }
 }
